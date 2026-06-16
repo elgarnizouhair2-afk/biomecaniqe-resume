@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Résumé Biomécanique Master – Pr. Mouilly</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap');
+
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1e2a;
+    --card: #222736;
+    --border: #2e3347;
+    --accent1: #4f8ef7;
+    --accent2: #e05a2b;
+    --accent3: #27c99a;
+    --accent4: #f0c040;
+    --text: #e8eaf0;
+    --muted: #8a91a8;
+    --heading-font: 'Playfair Display', Georgia, serif;
+    --body-font: 'Inter', system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body-font);
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #0b1628 0%, #1a2540 60%, #0f1930 100%);
+    border-bottom: 2px solid var(--accent1);
+    padding: 48px 5% 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -80px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(79,142,247,.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  header .kicker {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent1);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  header h1 {
+    font-family: var(--heading-font);
+    font-size: clamp(26px, 5vw, 42px);
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  header p {
+    color: var(--muted);
+    font-size: 14px;
+    max-width: 560px;
+  }
+  .badge {
+    display: inline-block;
+    background: rgba(79,142,247,.15);
+    border: 1px solid rgba(79,142,247,.35);
+    color: var(--accent1);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-top: 16px;
+  }
+
+  /* ── TOC ── */
+  .toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 36px 5%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .toc a {
+    color: var(--accent1);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 6px;
+    background: rgba(79,142,247,.1);
+    border: 1px solid rgba(79,142,247,.2);
+    transition: background .15s;
+  }
+  .toc a:hover { background: rgba(79,142,247,.25); }
+
+  /* ── LAYOUT ── */
+  main { padding: 0 5% 60px; }
+
+  section { margin-bottom: 52px; }
+
+  .section-title {
+    font-family: var(--heading-font);
+    font-size: 22px;
+    color: #fff;
+    border-left: 4px solid var(--accent1);
+    padding-left: 14px;
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title .icon { font-size: 20px; }
+
+  /* ── CARDS ── */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+  }
+  .card h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent4);
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    margin-bottom: 10px;
+  }
+  .card ul { padding-left: 18px; }
+  .card ul li { margin-bottom: 6px; font-size: 14px; }
+  .card p { font-size: 14px; }
+
+  /* ── TABLE ── */
+  .table-wrap { overflow-x: auto; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    background: var(--card);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  th {
+    background: #1e2740;
+    color: var(--accent1);
+    font-weight: 700;
+    text-align: left;
+    padding: 10px 14px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .6px;
+  }
+  td { padding: 9px 14px; border-top: 1px solid var(--border); }
+  tr:hover td { background: rgba(255,255,255,.03); }
+
+  /* ── KEY POINTS ── */
+  .key {
+    background: rgba(79,142,247,.07);
+    border: 1px solid rgba(79,142,247,.25);
+    border-left: 4px solid var(--accent1);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin-bottom: 14px;
+    font-size: 14px;
+  }
+  .key strong { color: var(--accent1); }
+
+  .warn {
+    background: rgba(224,90,43,.08);
+    border-left: 4px solid var(--accent2);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin-bottom: 14px;
+    font-size: 14px;
+  }
+  .warn strong { color: var(--accent2); }
+
+  .tip {
+    background: rgba(39,201,154,.07);
+    border-left: 4px solid var(--accent3);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin-bottom: 14px;
+    font-size: 14px;
+  }
+  .tip strong { color: var(--accent3); }
+
+  .highlight { color: var(--accent4); font-weight: 700; }
+  .accent { color: var(--accent3); font-weight: 600; }
+
+  /* ── TAG ── */
+  .tag {
+    display: inline-block;
+    background: rgba(240,192,64,.12);
+    color: var(--accent4);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 4px;
+    letter-spacing: .4px;
+  }
+
+  hr.divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 18px 0;
+  }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    padding: 24px 5%;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 600px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="kicker">Master – Institut des Métiers de Sport · Université Ibn Tofail</div>
+  <h1>Résumé Biomécanique<br>Pr. Mustapha MOUILLY</h1>
+  <p>Synthèse des points essentiels à maîtriser pour l'examen — pages 1 à 106</p>
+  <div class="badge">CHAPITRE I &amp; II · GÉNÉRALITÉS, MUSCLES, ARTICULATIONS, BIOMÉCANIQUE &amp; APPLICATIONS</div>
+</header>
+
+<div class="toc">
+  <a href="#plans">Plans &amp; Axes</a>
+  <a href="#articulations">Articulations</a>
+  <a href="#os">Les Os</a>
+  <a href="#muscles">Les Muscles</a>
+  <a href="#energie">Sources d'Énergie</a>
+  <a href="#proprioception">Proprioception</a>
+  <a href="#fatigue">Fatigue</a>
+  <a href="#biom-intro">Biomécanique</a>
+  <a href="#leviers">Leviers</a>
+  <a href="#equilibre">Équilibre Statique</a>
+  <a href="#lois">Lois Musculaires</a>
+  <a href="#anthropo">Anthropométrie</a>
+  <a href="#stabilite">Stabilité</a>
+  <a href="#grandeurs">Grandeurs Mécanique</a>
+</div>
+
+<main>
+
+<!-- ══════════════════════════════════════
+     I. PLANS, AXES & MOUVEMENTS
+══════════════════════════════════════ -->
+<section id="plans">
+  <div class="section-title"><span class="icon">🧭</span> I · Plans, Axes et Mouvements</div>
+
+  <div class="key"><strong>Position anatomique :</strong> corps humain vivant, debout, pieds réunis et parallèles, membres supérieurs le long du corps, <em>paume des mains tournée en avant</em>. Toute description anatomique se réfère à cette position.</div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Termes d'orientation</h3>
+      <ul>
+        <li><strong>Antérieur/Postérieur</strong> – avant/arrière</li>
+        <li><strong>Supérieur/Inférieur</strong> – haut/bas (crânien/caudal)</li>
+        <li><strong>Médial/Latéral</strong> – vers le milieu/vers l'extérieur</li>
+        <li><strong>Proximal/Distal</strong> – près/loin de l'axe médian</li>
+        <li><strong>Superficiel/Profond</strong> – surface/intérieur</li>
+        <li><strong>Ipsilatéral</strong> – même côté ; <strong>Controlatéral</strong> – côté opposé</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Les 3 Plans de référence</h3>
+      <ul>
+        <li><span class="highlight">Sagittal</span> – divise le corps en gauche/droite</li>
+        <li><span class="highlight">Frontal</span> – divise le corps en avant/arrière</li>
+        <li><span class="highlight">Transversal</span> – divise le corps en haut/bas</li>
+      </ul>
+      <p style="margin-top:8px;font-size:13px;color:var(--muted)">Les 3 plans sont perpendiculaires (orthogonaux) les uns aux autres.</p>
+    </div>
+    <div class="card">
+      <h3>Les 3 Axes de rotation</h3>
+      <ul>
+        <li><strong>Antéro-postérieur</strong> (sagittal) → intersection plans sagittal + transversal</li>
+        <li><strong>Frontal/bilatéral</strong> → intersection plans frontal + transversal</li>
+        <li><strong>Longitudinal/vertical</strong> → intersection plans sagittal + frontal</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <div class="section-title" style="font-size:17px;margin-top:20px;"><span class="icon">🔄</span> Tableau synthèse Mouvements articulaires</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Plan</th><th>Faces</th><th>Mouvements</th><th>Axe</th><th>Exceptions</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Sagittal</td><td>Interne / Externe</td><td>Flexion / Extension</td><td>Frontal ou bilatéral</td><td>Flexion plantaire, dorsiflexion (cheville)</td></tr>
+        <tr><td>Frontal</td><td>Antérieure / Postérieure</td><td>Abduction / Adduction</td><td>Sagittal ou antéro-postérieur</td><td>Éversion / Inversion (cheville)</td></tr>
+        <tr><td>Transversal</td><td>Supérieure / Inférieure</td><td>Rotation interne / Rotation externe</td><td>Longitudinal ou bi-polaire</td><td>Pronation / Supination (avant-bras)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="divider">
+  <div class="grid" style="margin-top:16px;">
+    <div class="card">
+      <h3>Autres mouvements</h3>
+      <ul>
+        <li><strong>Circumduction</strong> – combinaison des mouvements fondamentaux (pouce)</li>
+        <li><strong>Antépulsion / Rétropulsion</strong> – vers l'avant / vers l'arrière (mâchoire, bras)</li>
+        <li><strong>Inclinaison latérale</strong> – squelette axial dans le plan frontal</li>
+        <li><strong>Dorsiflexion / Flexion plantaire</strong> – cheville et orteils</li>
+        <li><strong>Inversion / Éversion</strong> – adduction+RI / abduction+RE du pied</li>
+        <li><strong>Antéversion / Rétroversion du bassin</strong></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Règles à retenir</h3>
+      <ul>
+        <li>Flexion = fermeture de l'angle entre segments</li>
+        <li>Extension = ouverture de l'angle</li>
+        <li>Abduction = éloignement du plan médian</li>
+        <li>Adduction = rapprochement du plan médian</li>
+        <li>Rotation externe = éloignement de la face ant. du plan médian</li>
+        <li>Adduction doigts = axe par le 3ᵉ doigt ; orteils = axe par le 2ᵉ orteil</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     II. ARTICULATIONS
+══════════════════════════════════════ -->
+<section id="articulations">
+  <div class="section-title"><span class="icon">🦴</span> II · Les Articulations</div>
+
+  <div class="key"><strong>Définition :</strong> union entre 2 (ou plus) structures osseuses. La nomenclature va de centrale à périphérique (ex. : coxo-fémorale).</div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Classification (3 groupes)</h3>
+      <ul>
+        <li><span class="highlight">Diarthroses (synoviales)</span> – mobiles : capsule, membrane synoviale, cartilage hyalin, ligaments</li>
+        <li><span class="highlight">Amphiarthroses (cartilagineuses)</span> – semi-mobiles : symphyse pubienne, disques intervertébraux</li>
+        <li><span class="highlight">Synarthroses (fibreuses)</span> – immobiles : sutures crâniennes, syndesmoses</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Structure d'une Diarthrose</h3>
+      <ul>
+        <li><strong>Cavité articulaire</strong> – remplie de synovie (lubrification)</li>
+        <li><strong>Surface articulaire</strong> – cartilage hyalin (non vascularisé, nourri par imbibition)</li>
+        <li><strong>Capsule articulaire</strong> – manchon fibreux, maintient les extrémités</li>
+        <li><strong>Membrane synoviale</strong> – nutrition cartilage, lubrification, amortissement, résorption</li>
+        <li><strong>Ligaments</strong> – fibreux, élastiques, intra ou extra-articulaires</li>
+        <li><strong>Muscles</strong> – moteurs articulaires (contraction)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>6 Variétés de Diarthroses</h3>
+      <ul>
+        <li><strong>Énarthrose</strong> – sphère/creux · ex. épaule, hanche</li>
+        <li><strong>Condylienne</strong> – ellipsoïde · ex. poignet</li>
+        <li><strong>Trochléenne</strong> – poulie · ex. coude (flexion-extension seule)</li>
+        <li><strong>Trochoïde</strong> – pivot cylindrique · ex. radio-ulnaire prox.</li>
+        <li><strong>En selle</strong> – concave/convexe réciproque · ex. carpo-métacarpienne</li>
+        <li><strong>Arthrodie (plane)</strong> – glissements · ex. os du carpe et du tarse</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tip" style="margin-top:14px;"><strong>Ménisques, bourrelet, disques</strong> : structures fibro-cartilagineuses présentes dans les diarthroses dont les surfaces sont discordantes → améliorent la congruence articulaire.</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     III. LES OS
+══════════════════════════════════════ -->
+<section id="os">
+  <div class="section-title"><span class="icon">🦴</span> III · Les Os</div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Classification (4 types)</h3>
+      <ul>
+        <li><strong>Os longs</strong> – épiphyses (×2) + diaphyse + canal médullaire · ex. fémur</li>
+        <li><strong>Os courts</strong> – ex. métacarpes</li>
+        <li><strong>Os plats</strong> – ex. os iliaque</li>
+        <li><strong>Os irréguliers</strong> – ex. os carpiens</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Rôles des Os</h3>
+      <ul>
+        <li>Support mécanique</li>
+        <li>Protection des organes</li>
+        <li>Locomotion (leviers)</li>
+        <li>Réservoir de sels minéraux</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Morphologie tissulaire</h3>
+      <ul>
+        <li><strong>Os cortical (compact)</strong> – dense, diaphyse</li>
+        <li><strong>Os trabéculaire (spongieux)</strong> – épiphyse</li>
+        <li><strong>Os endochondral</strong> – calcification de cartilage</li>
+        <li><strong>Os membraneux</strong> – à partir de tissus mésenchymateux</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Cellules osseuses</h3>
+      <ul>
+        <li><strong>Ostéoproginiteurs</strong> – cellules souches</li>
+        <li><strong>Ostéoblastes</strong> – formation osseuse</li>
+        <li><strong>Ostéocytes</strong> – maintien de la matrice</li>
+        <li><strong>Ostéoclastes</strong> – résorption osseuse</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Croissance osseuse</h3>
+      <ul>
+        <li><strong>En longueur</strong> – au niveau du cartilage épiphysaire (division des chondrocytes) · hormones : GH, thyroïde, sexuelles</li>
+        <li><strong>En épaisseur</strong> – par apposition, à partir des ostéoblastes du périoste → formation de nouveaux ostéons</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Facteurs alimentaires</h3>
+      <ul>
+        <li>Acides aminés → collagène, protéoglycanes</li>
+        <li>Vit. C → matrice préosseuse</li>
+        <li>Vit. A → ostéoclastes + ostéoblastes</li>
+        <li><strong>Calcium + Vit. D</strong> → indispensables à la minéralisation</li>
+        <li>Excès phosphore → malabsorption du calcium</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="warn" style="margin-top:14px;"><strong>Squelette adulte :</strong> 206 os — squelette axial (boite crânienne, os hyoïde, colonne vertébrale, cage thoracique) + squelette appendiculaire (ceintures scapulaire et pelvienne + membres).</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     IV. LES MUSCLES
+══════════════════════════════════════ -->
+<section id="muscles">
+  <div class="section-title"><span class="icon">💪</span> IV · Les Muscles</div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>3 types de tissu musculaire</h3>
+      <ul>
+        <li><strong>Strié squelettique</strong> – locomotion, statique, mouvement → contrôle volontaire</li>
+        <li>Musculaire cardiaque</li>
+        <li>Musculaire lisse</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Organisation du muscle strié</h3>
+      <ul>
+        <li>Muscle (organe) → Faisceau → Fibre (cellule) → Myofibrille → <strong>Sarcomère</strong></li>
+        <li>Sarcomère = unité fonctionnelle de 1,5–2 mm ; constitué de myofilaments d'<strong>actine</strong> (fins) et de <strong>myosine</strong> (épais)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Théorie de la contraction (Huxley 1954)</h3>
+      <p>Glissement des filaments minces (actine) sur les filaments épais (myosine) → chevauchement accru → <strong>raccourcissement des sarcomères</strong> → contraction du muscle.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <div class="section-title" style="font-size:17px;margin-top:16px;"><span class="icon">⚡</span> Propriétés biologiques</div>
+  <div class="grid">
+    <div class="card">
+      <h3>A. Excitabilité</h3>
+      <ul>
+        <li>Capacité à répondre à un stimulus (mécanique, chimique, électrique)</li>
+        <li><strong>Loi du tout ou rien</strong> : le muscle se contracte ou ne se contracte pas</li>
+        <li>Chronaxie basse → muscle rapide ; Chronaxie haute → muscle lent</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>B. Contractilité</h3>
+      <p>Faculté de se raccourcir et de déplacer les éléments de la structure.</p>
+      <ul style="margin-top:8px;">
+        <li><strong>Phase de latence</strong> – délai entre stimulation et début de contraction</li>
+        <li><strong>Phase de contraction</strong> – raccourcissement</li>
+        <li><strong>Phase réfractaire</strong> – récupération, le muscle ne répond pas</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>C. Élasticité</h3>
+      <p>Le muscle s'allonge par traction et revient à sa position d'origine. Joue un rôle d'<strong>amortisseur</strong>. Un muscle chaud est plus élastique → meilleur rendement.</p>
+    </div>
+    <div class="card">
+      <h3>D. Tonicité</h3>
+      <p><strong>Tonus musculaire</strong> = légère contraction permanente involontaire. Sans connexions nerveuses → perte du tonus → paralysie.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <div class="section-title" style="font-size:17px;margin-top:16px;"><span class="icon">🔬</span> Phénomènes biologiques</div>
+  <div class="grid">
+    <div class="card">
+      <h3>A. Phénomènes thermiques</h3>
+      <ul>
+        <li>La contraction produit de la chaleur</li>
+        <li>80 % de l'énergie musculaire → chaleur (thermorégulation)</li>
+        <li>Effort intense → sudation pour évacuer l'excès</li>
+        <li>Frisson = mécanisme de réchauffement</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>B. Phénomènes électriques</h3>
+      <p>Différence de potentiel entre surface (+) et intérieur (–) du muscle → dépolarisation lors d'un effort le long des nerfs.</p>
+    </div>
+    <div class="card">
+      <h3>C. Phénomènes hormonaux</h3>
+      <p>À la plaque motrice (jonction nerf-muscle) : libération d'<strong>acétylcholine</strong> → médiateur chimique déclenchant la contraction.</p>
+    </div>
+    <div class="card">
+      <h3>D. Phénomènes mécaniques</h3>
+      <ul>
+        <li><strong>Contraction isotonique</strong> – raccourcissement du muscle = travail dynamique</li>
+        <li><strong>Contraction isométrique</strong> – pas de variation de longueur = travail statique</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>E. Phénomènes chimiques</h3>
+      <ul>
+        <li>Contraction → <strong>dépense d'ATP</strong></li>
+        <li>Utilise O₂ + glycogène (et lipides, acides gras)</li>
+        <li>Production d'<strong>acide lactique</strong> (déchet de la glycolyse)</li>
+        <li>Hydrolyse ATP → ADP + Pi + énergie</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Contraction – de l'électrique au mécanique</h3>
+      <p>PA → Tubules-T → libération Ca²⁺ → démasquage actine → têtes de myosine fixées → glissement actine/myosine → raccourcissement sarcomères → relâchement : réabsorption Ca²⁺ (phénomène actif).</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <div class="section-title" style="font-size:17px;margin-top:16px;"><span class="icon">📐</span> Modélisation du muscle</div>
+  <div class="grid">
+    <div class="card">
+      <h3>Relation Force/Vitesse</h3>
+      <ul>
+        <li><strong>Excentrique</strong> – force ↑ mais contraintes musculo-squelettiques ↑</li>
+        <li><strong>Concentrique</strong> – vitesse ↑ → force ↓ (pas de réflexe d'inhibition)</li>
+        <li>Force max en isométrique (V=0)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Relation Force/Position (Courbe de Blix)</h3>
+      <p>La force développée dépend de la position articulaire. La courbe est la signature d'une articulation saine. Le pic de couple varie selon la vitesse angulaire testée.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     V. SOURCES D'ÉNERGIE
+══════════════════════════════════════ -->
+<section id="energie">
+  <div class="section-title"><span class="icon">⚡</span> V · Sources d'Énergie Musculaire</div>
+
+  <div class="key"><strong>Principe :</strong> ÉNERGIE CHIMIQUE (ATP) → MUSCLE → ÉNERGIE MÉCANIQUE. Le muscle est un convertisseur d'énergie.</div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Type</th><th>Glycolyse aérobie</th><th>Glycolyse anaérobie</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Substrat</td><td>Acide pyruvique</td><td>Acide pyruvique</td></tr>
+        <tr><td>Lieu</td><td>Mitochondrie</td><td>Cytoplasme</td></tr>
+        <tr><td>Nature</td><td>Respiration (oxydation)</td><td>Fermentation</td></tr>
+        <tr><td>Conditions</td><td>Travail peu intense, riche en O₂</td><td>Travail intense, pauvre en O₂</td></tr>
+        <tr><td>Produits</td><td>CO₂ + H₂O + beaucoup d'ATP</td><td>Acide lactique + peu d'ATP</td></tr>
+        <tr><td>Effet muscle</td><td>Poursuite des contractions</td><td><strong>Fatigue musculaire</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tip" style="margin-top:14px;"><strong>Énergie immédiate :</strong> hydrolyse de l'ATP. Sources de régénération rapides (ACP → ADP + ATP) ou lentes (glycolyse aérobie/anaérobie).</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     VI. LÉSIONS & TENDON
+══════════════════════════════════════ -->
+<section>
+  <div class="section-title"><span class="icon">🩹</span> VI · Lésions Musculaires, Tendon &amp; Cicatrisation</div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Cicatrisation musculaire</h3>
+      <ul>
+        <li><strong>Phase inflammatoire</strong> : Compression, Cryothérapie, Physiothérapie</li>
+        <li><strong>Phase de reconstruction</strong> : travail excentrique → maturation fibroblastes + synthèse collagène</li>
+        <li><strong>Phase de modelage</strong> : travail excentrique → alignement fibres, prévention des amas; remaniement histologique complet en 5 mois</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Le Tendon</h3>
+      <ul>
+        <li>Tissu conjonctif dense, très peu vascularisé</li>
+        <li>Fibres de <strong>collagène</strong> parallèles (&gt;95 % du poids sec)</li>
+        <li>Unité fondamentale : <strong>tropocollagène</strong></li>
+        <li>Rôle : attacher le muscle à l'os, transmettre les forces musculaires</li>
+        <li>Muscle + tendon = unité dynamique</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Pathologies tendineuses</h3>
+      <ul>
+        <li>Jonction myotendineuse → micro-ruptures, désinsertions partielles</li>
+        <li>Corps du tendon → tendinose (chronique, non inflammatoire)</li>
+        <li>Jonction ostéo-tendineuse → micro-arrachements, calcifications</li>
+        <li>Bourses séreuses → ténobursites</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     VII. PROPRIOCEPTION
+══════════════════════════════════════ -->
+<section id="proprioception">
+  <div class="section-title"><span class="icon">🧠</span> VII · Proprioception</div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Sensibilité proprioceptive</h3>
+      <ul>
+        <li><strong>Statesthésie</strong> – positions relatives du corps</li>
+        <li><strong>Kinesthésie</strong> – sensation des mouvements</li>
+        <li><strong>Sensation labyrinthique</strong> – mouvements céphaliques</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Fuseaux neuromusculaires</h3>
+      <p>Récepteurs dans le muscle, sensibles à la composante <strong>statique ET dynamique</strong> de l'allongement musculaire. → Réflexe myotatique : étirement → contraction du même muscle + inhibition des antagonistes.</p>
+    </div>
+    <div class="card">
+      <h3>Organes tendineux de Golgi (OTG)</h3>
+      <p>À la jonction musculo-tendineuse. Captent l'<strong>étirement du tendon</strong>. Sensibles à la tension passive ET active. Déclenchent le <strong>réflexe myotatique inverse</strong> (inhibition du muscle → protection).</p>
+    </div>
+    <div class="card">
+      <h3>Récepteurs articulaires</h3>
+      <p>Dans la capsule et les ligaments. Sensibles à la <strong>vitesse, direction et amplitude</strong> du mouvement → principaux responsables du sens de la position des membres. Types : corpuscules de Ruffini, organes de Golgi-Mazzoni, corpuscules de Vater-Pacini.</p>
+    </div>
+    <div class="card">
+      <h3>Récepteurs cutanés</h3>
+      <p>Mécanorécep­teurs sensibles au toucher et à la déformation de la peau. 2 types : <strong>à adaptation lente</strong> (position) et <strong>à adaptation rapide</strong> (mouvement).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     VIII. FATIGUE MUSCULAIRE
+══════════════════════════════════════ -->
+<section id="fatigue">
+  <div class="section-title"><span class="icon">😓</span> VIII · Fatigue Musculaire</div>
+
+  <div class="key"><strong>Définition :</strong> Incapacité à maintenir une force/puissance requise. État résultant de contraintes physiologiques et psychologiques → diminution des performances physiques et mentales.</div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Types de Fatigue</h3>
+      <ul>
+        <li><strong>Aiguë</strong> – affecte individus sains, origines identifiables, courte durée, rôle protecteur</li>
+        <li><strong>Chronique</strong> – pathologique, syndrome de surentraînement</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Composantes de la Fatigue</h3>
+      <ul>
+        <li>Périphérique (musculaire)</li>
+        <li>Centrale (nerveuse)</li>
+        <li>Endocrinienne</li>
+        <li>Immunitaire</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Perturbations</h3>
+      <ul>
+        <li><em>Fatigue centrale</em> : réduction du recrutement et de la fréquence de décharge des unités motrices</li>
+        <li><em>Fatigue périphérique</em> : blocage axonal, diminution transfert sarcolemmal, ralentissement du transfert calcique</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     IX. BIOMÉCANIQUE INTRODUCTION
+══════════════════════════════════════ -->
+<section id="biom-intro">
+  <div class="section-title"><span class="icon">⚙️</span> IX · Introduction à la Biomécanique (Chapitre II)</div>
+
+  <div class="key"><strong>Biomécanique du mouvement humain :</strong> étude du geste sportif et du mouvement humain en général, à partir des propriétés mécaniques du système musculo-squelettique jusqu'aux déplacements des segments corporels sous l'effet de l'activation des muscles et de l'environnement.</div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Définitions clés</h3>
+      <ul>
+        <li><strong>Physiologie</strong> – fonctionnement du corps pour maintenir la vie</li>
+        <li><strong>Anatomie</strong> – structure du corps, positions et mouvements</li>
+        <li><strong>Biomécanique</strong> – application de la mécanique au corps humain</li>
+        <li><strong>Ergonomie</strong> – optimisation des équipements de travail</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Domaines de la Biomécanique</h3>
+      <ul>
+        <li>🏋️ <strong>Sport</strong> – compréhension du geste, amélioration, optimisation matériel</li>
+        <li>🏥 <strong>Médecine</strong> – pathologies, réadaptation, prothèses/orthèses</li>
+        <li>🤖 <strong>Robotique</strong> – humanoïdes, exosquelettes</li>
+        <li>💼 <strong>Ergonomie</strong> – bureaux, transports, usines</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>La Machine Humaine</h3>
+      <table style="font-size:13px;width:100%;margin-top:6px;">
+        <tr><th style="font-size:11px;">Structure</th><th style="font-size:11px;">Fonction</th><th style="font-size:11px;">Équivalent mécanique</th></tr>
+        <tr><td>Os</td><td>Porter, supporter</td><td>Carrosserie</td></tr>
+        <tr><td>Articulations</td><td>Déformation de structure</td><td>Axes</td></tr>
+        <tr><td>Tendons</td><td>Cohésion</td><td>Liaisons mécaniques</td></tr>
+        <tr><td>Muscles</td><td>Mouvement, stabilisation</td><td>Moteurs</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     X. LEVIERS ANATOMIQUES
+══════════════════════════════════════ -->
+<section id="leviers">
+  <div class="section-title"><span class="icon">⚖️</span> X · Leviers Anatomiques</div>
+
+  <div class="key">Un levier est une barre rigide, mobile autour d'un point fixe (A = appui, axe de rotation), soumis à 2 forces opposées : <strong>P (puissance)</strong> = force musculaire et <strong>R (résistance)</strong> = force externe. Moment = F × d (bras de levier).</div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Genre</th><th>Configuration</th><th>Avantages/Inconvénients</th><th>Exemples anatomiques</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1ᵉʳ genre (inter-appuis)</strong></td>
+          <td>A entre P et R · ex. balance</td>
+          <td>P égale à R si bras = longueurs → équilibre</td>
+          <td>Extenseurs du cou / tête</td>
+        </tr>
+        <tr>
+          <td><strong>2ᵉ genre (inter-résistant)</strong></td>
+          <td>R entre A et P · ex. casse-noix</td>
+          <td>Efficacité P (++) ; amplitude de mouvement limitée</td>
+          <td>Rare dans le corps humain</td>
+        </tr>
+        <tr>
+          <td><strong>3ᵉ genre (inter-moteur)</strong></td>
+          <td>P entre A et R · ex. pince</td>
+          <td>Efficacité P (–) mais grande amplitude</td>
+          <td><strong>Le plus fréquent</strong> dans l'appareil locomoteur (biceps/coude)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="warn" style="margin-top:14px;"><strong>Moment d'une force :</strong> M = F × d. Pour le biceps brachial : bras de levier ≈ 4 cm (0,04 m). Un avant-bras de 2 kg avec D=10 cm nécessite une force musculaire de ≈ <strong>49 N</strong> pour le maintenir horizontal.</div>
+
+  <div class="tip"><strong>Règle importante :</strong> Ce ne sont pas les forces des muscles qui comptent directement sur les rotations articulaires, mais leurs <strong>moments</strong>. M = F × d (bras de levier perpendiculaire à la ligne d'action de la force).</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     XI. EQUILIBRE STATIQUE
+══════════════════════════════════════ -->
+<section id="equilibre">
+  <div class="section-title"><span class="icon">🧍</span> XI · Équilibre Statique</div>
+
+  <div class="key"><strong>Définition :</strong> un corps est en équilibre statique s'il n'a ni mouvement de translation, ni mouvement de rotation → corps au repos, immobile. Condition : ΣF = 0 ET ΣM = 0.</div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Centre de Masse (CM = CG)</h3>
+      <ul>
+        <li>Point matériel contenant toute la masse du corps</li>
+        <li>Propriété intrinsèque du corps (dépend de la posture)</li>
+        <li>Les forces s'appliquent en ce point</li>
+        <li>g ≈ 9,81 m.s⁻² → Poids = m × g</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Base de sustentation</h3>
+      <ul>
+        <li>Surface au sol sur laquelle le corps repose</li>
+        <li><strong>Condition nécessaire d'équilibre :</strong> la projection verticale du CM doit se trouver dans la base de sustentation</li>
+        <li>Si la projection sort de la base → déséquilibre</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Réaction Normale</h3>
+      <p>Force provenant du contact entre le corps et son support (principe d'action/réaction). La réaction normale est toujours <strong>perpendiculaire</strong> au support. Le poids est toujours vertical.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     XII. LOIS MUSCULAIRES
+══════════════════════════════════════ -->
+<section id="lois">
+  <div class="section-title"><span class="icon">📜</span> XII · Les 4 Lois Musculaires</div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Loi 1 – Multivalence fonctionnelle</h3>
+      <p>Un muscle <strong>n'a pas une, mais plusieurs actions</strong>. Les muscles mono-articulaires mobilisant une seule articulation sont rares. Ex. : biceps brachial = fléchisseur du coude + supinateur + abducteur de l'épaule…</p>
+    </div>
+    <div class="card">
+      <h3>Loi 2 – Synergie</h3>
+      <p>Un mouvement élémentaire est rarement produit par un seul muscle. Nécessite l'action <strong>synergique de 2 ou plusieurs muscles agonistes</strong>. Permet des suppléances lorsqu'un muscle est défaillant.</p>
+    </div>
+    <div class="card">
+      <h3>Loi 3 – Variation et inversion des actions</h3>
+      <p>L'action d'un muscle varie <strong>quantitativement</strong> (changement d'intensité) et <strong>qualitativement</strong> (inversion de l'action) au cours d'un même mouvement.</p>
+    </div>
+    <div class="card">
+      <h3>Loi 4 – Antagonisme</h3>
+      <p>La contraction d'un muscle est fonctionnellement liée à celle de son/ses antagonistes : successivement (amortissement mouvements rapides) ou simultanément (maintien du tonus et verrouillage articulaire, mouvements lents et précis).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     XIII. ANTHROPOMÉTRIE
+══════════════════════════════════════ -->
+<section id="anthropo">
+  <div class="section-title"><span class="icon">📏</span> XIII · Anthropométrie &amp; Segments Corporels</div>
+
+  <div class="key"><strong>Anthropométrie :</strong> étude des particularités dimensionnelles et physiques du corps humain. En biomécanique, on a besoin des dimensions, masses des segments, position du CM et moments d'inertie.</div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Table de Winter (1990) – longueurs</h3>
+      <table style="font-size:12px;width:100%;margin-top:6px;">
+        <tr><th style="font-size:10px;">Segment</th><th style="font-size:10px;">Longueur/H</th></tr>
+        <tr><td>Jambe</td><td>0.246 × H</td></tr>
+        <tr><td>Cuisse</td><td>0.245 × H</td></tr>
+        <tr><td>Avant-bras</td><td>0.146 × H</td></tr>
+        <tr><td>Bras</td><td>0.186 × H</td></tr>
+      </table>
+      <p style="font-size:12px;margin-top:6px;color:var(--muted)">H = taille du sujet</p>
+    </div>
+    <div class="card">
+      <h3>Table De Leva (1996) – masses %</h3>
+      <table style="font-size:12px;width:100%;margin-top:6px;">
+        <tr><th style="font-size:10px;">Segment</th><th style="font-size:10px;">% masse corps</th></tr>
+        <tr><td>Tête + Cou</td><td>6,94 %</td></tr>
+        <tr><td>Tronc sup.</td><td>15,96 %</td></tr>
+        <tr><td>Tronc inf.</td><td>27,50 %</td></tr>
+        <tr><td>Cuisse</td><td>14,16 %</td></tr>
+        <tr><td>Jambe</td><td>4,33 %</td></tr>
+        <tr><td>Bras</td><td>2,71 %</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Centre de Masse d'un segment</h3>
+      <p>Le CM de la jambe est à <strong>43,3 % de sa longueur</strong> par rapport à l'extrémité proximale (genou). Si H=1,80 m → jambe = 0,4428 m → CM à 0,192 m du genou.</p>
+      <p style="margin-top:8px;">Le CM global est trouvé à partir des CM de chaque segment pondérés par leurs masses.</p>
+    </div>
+    <div class="card">
+      <h3>Force efficace</h3>
+      <p><strong>Fe = F × cos α</strong> – seule la composante perpendiculaire au segment osseux (composante motrice) génère une rotation. La composante parallèle (stabilisatrice) rapproche ou éloigne les surfaces articulaires.</p>
+    </div>
+  </div>
+
+  <div class="tip" style="margin-top:14px;"><strong>Cinématique inverse :</strong> méthodes de calcul des positions et rotations d'un modèle articulaire pour obtenir une pose désirée (infographie, robotique, animation).</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     XIV. STABILITE
+══════════════════════════════════════ -->
+<section id="stabilite">
+  <div class="section-title"><span class="icon">🏋️</span> XIV · Stabilité d'un Corps</div>
+
+  <div class="key"><strong>Stabilité :</strong> capacité d'un corps à maintenir son état d'équilibre. Dépend de 4 facteurs principaux.</div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Facteur 1 – Surface de sustentation</h3>
+      <p>Plus la surface est <strong>petite</strong> → plus l'instabilité est <strong>grande</strong>. Ex. : gymnaste en équilibre sur une poutre (surface minimale).</p>
+    </div>
+    <div class="card">
+      <h3>Facteur 2 – Hauteur du centre de gravité</h3>
+      <p>Plus le CG est <strong>bas</strong> → plus l'équilibre est <strong>stable</strong>. Les athlètes baissent leur position pour stabiliser (arts martiaux, rugby).</p>
+    </div>
+    <div class="card">
+      <h3>Facteur 3 – Masse du sujet</h3>
+      <p>Un corps plus <strong>lourd</strong> est plus stable (nécessite une force plus grande pour le déplacer). Raison de la division des athlètes en catégories de poids dans les sports de combat.</p>
+    </div>
+    <div class="card">
+      <h3>Facteur 4 – Position de la ligne d'action de la gravité</h3>
+      <p>Plus la ligne d'action du poids passe au <strong>centre</strong> de la base d'appui → plus la stabilité est grande. Près du bord → instable (ex. tour de Pise).</p>
+    </div>
+  </div>
+
+  <div class="warn" style="margin-top:14px;"><strong>Remarque :</strong> statique ≠ toujours synonyme de stabilité. Ex. : un cycliste a plus d'équilibre en roulant qu'à l'arrêt.</div>
+</section>
+
+<!-- ══════════════════════════════════════
+     XV. GRANDEURS MÉCANIQUES
+══════════════════════════════════════ -->
+<section id="grandeurs">
+  <div class="section-title"><span class="icon">🔢</span> XV · Grandeurs Mécaniques (Biomécanique)</div>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Sous-disciplines</h3>
+      <ul>
+        <li><strong>Cinématique linéaire</strong> – distances, déplacements, vitesses, accélérations</li>
+        <li><strong>Cinématique angulaire</strong> – déplacements, vitesses, accélérations angulaires</li>
+        <li><strong>Cinétique linéaire</strong> – forces qui causent ou résultent du mouvement linéaire</li>
+        <li><strong>Cinétique angulaire</strong> – couples et moments causant le mouvement angulaire</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Force en Biomécanique</h3>
+      <ul>
+        <li>Cause capable de modifier la vitesse ou la déformation d'un corps</li>
+        <li>Caractérisées par : ligne d'action, sens, point d'application, intensité, sources</li>
+        <li><strong>Efficacité : Fe = F × cos α</strong></li>
+        <li><strong>Bras de levier</strong> = distance perpendiculaire entre le point d'appui et la ligne d'action</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Élasticité osseuse</h3>
+      <ul>
+        <li>Module de Young : E = (F/S) / (ΔL/L) ≈ 2000 kg/mm²</li>
+        <li>L'os est anisotrope : élasticité longitudinale = 2× élasticité transversale</li>
+        <li>Résistance à la fatigue : l'os supporte 1 à 2,8 milliards de cycles</li>
+        <li>Os plus résistant en compression qu'en flexion/torsion</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  Résumé élaboré d'après le support de cours Biomécanique, Pr. Mustapha MOUILLY – Institut des Métiers de Sport, Université Ibn Tofail, Kénitra · Pages 1–106
+</footer>
+
+</body>
+</html>
